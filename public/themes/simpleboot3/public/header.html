@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <if condition="$kewordse.seo_titleen neq ''">
+        <title>{$kewordse.seo_titleen}</title>
+        <elseif condition="$kewords.post_title neq ''">
+            <title>{$kewords.post_titlem}</title>
+            <else />
+            <title>{$site_info.site_seo_titleen|default=''}</title>
+    </if>
+
+    <if condition="$kewordse.seo_keywordsen neq ''">
+        <meta name="keywords" content="{$kewordse.seo_keywordsen}" />
+        <elseif condition="$kewords.post_keywordsm neq ''">
+            <meta name="keywords" content="{$kewords.post_keywordsm}" />
+            <else />
+            <meta name="keywords" content="{$site_info.site_seo_keywordsen|default=''}" />
+    </if>
+
+    <if condition="$kewordse.seo_descriptionen neq ''">
+        <meta name="description" content="{$kewordse.seo_descriptionen}" />
+        <elseif condition="$kewords.post_excerptm neq ''">
+            <meta name="description" content="{$kewords.post_excerptm}" />
+            <else />
+            <meta name="description" content="{$site_info.site_seo_descriptionen|default=''}" />
+    </if>
+    <link rel="icon" href="__img__/favicon.ico" type="image/png">
+    <link rel="stylesheet" type="text/css" href="__TMPL__/public/assets/fonts/iconfont.css" />
+    <link rel="stylesheet" href="__TMPL__/public/assets/css/global.css">
+    <link rel="stylesheet" href="__TMPL__/public/assets/css/style.css">
+    <link rel="stylesheet" href="__TMPL__/public/assets/css/css.css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="__TMPL__/public/assets/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/controller.js"></script>
+
+
+
+    <script type="text/javascript" src="__TMPL__/public/assets/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/fancybox/jquery.fancybox-1.3.1.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/fancybox/jquery.jqzoom.js"></script>
+    <link rel="stylesheet" type="text/css" href="__TMPL__/public/assets/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
+    <link rel="stylesheet" href="__TMPL__/public/assets/fancybox/jqzoom.css" type="text/css" media="screen" />
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $("a[rel=example_group]").fancybox({
+                'titleShow'			: true,
+                'transitionIn'		: 'none',
+                'transitionOut'		: 'none'
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="top">
+        <h1><a href="{$index}"><img src="__TMPL__/public/assets/images/logo.png" alt=""></a></h1>
+        <div class="nav">
+            <ul>
+                <volist name="bt" id="vo">
+                    <li><a href="{$vo.hrefen}" {$vo.id == $eid ? 'class="current"':''}>{$vo.namem}</a></li>
+                </volist>
+            </ul>
+        </div>
+        <div class="yuyan"><a href="{$cn}">Cn</a> / <a href="#"  class="current">En</a></div>
+        <div class="menu"><a href="javascript:;" class="openclose iconfont icon-daohang"></a></div>
+    </div>
+</div>
+<div class="sub_menu">
+    <div class="box">
+        <div class="nav_er">
+            <ul>
+                <volist name="bt" id="vo">
+                    <li><a href="{$vo.hrefen}">{$vo.namem}</a></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</div>

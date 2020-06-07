@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <include file="public/head"/>
+    <title>评论列表</title>
+    <meta name="description" content="评论列表">
+    <meta name="keywords" content="评论列表">
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a>评论列表</a></li>
+    </ul>
+    <div class="common-form">
+        <form method="post" class="js-ajax-form" action="#">
+            <div class="table_list">
+                <table width="100%" class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th width="50">ID</th>
+                        <th width="100">原文地址</th>
+                        <th width="150">评论者昵称</th>
+                        <th width="150">邮箱</th>
+                        <th>评论内容</th>
+                        <th width="120">评论时间</th>
+                        <th>回复</th>
+                        <th>操作</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <foreach name="datas" item="vo">
+                        <tr>
+                            <td>{$vo.id|default=''}</td>
+                            <td title=" {$vo.url|default=''}">
+                                {$vo.url|mb_substr=0,6,'utf-8'}....
+
+                            </td>
+                            <td>{$vo.full_name|default='匿名评论'}</td>
+                            <td>{$vo.email|default='--'}</td>
+                            <td>{$vo.content|default=''}</td>
+                            <td>{$vo.create_time|date='Y-m-d H:i:s',###}</td>
+                            <td><textarea class="comment-post-textarea" rows="2" name="content" id="{$vo.id}" onchange="button(this)">{$vo.contenth|default=''}</textarea></td>
+                            <td>
+                                <a class="js-ajax-dialog-btn"
+                                   href="{:cmf_plugin_url('Comment://AdminIndex/verify/',['id'=>$vo['id'],'status'=>$vo['status']]);}"
+                                   data-msg="您确定要<if condition='$vo.status eq 0'>审核<else/>取消审核</if>评论吗？" data-ok=""
+                                   data-cacel="取消">
+                                    <if condition='$vo.status eq 0'>审核<else/>取消审核</if>
+                                </a>
+                                &nbsp;&nbsp;
+                                <a class="js-ajax-dialog-btn"
+                                   href="{:cmf_plugin_url('Comment://AdminIndex/delete',array('id'=>$vo['id']));}"
+                                   data-msg="您确定要删除评论吗？" data-ok="" data-cacel="取消">删除评论</a>
+
+                            </td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <ul class="pagination">{$page|default=''}</ul>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function button(obj) {
+        var id=obj.id;
+        var content=obj.value;
+
+        $.ajax({
+            tpye:"post",
+            url:"{:cmf_plugin_url('Comment://AdminIndex/upid');}",
+            data:{id:id,content:content},
+            success:function (data) {
+                console.log(data);
+        }
+    })
+    }
+</script>
+<include file="public/scripts"/>
+</body>
+</html>

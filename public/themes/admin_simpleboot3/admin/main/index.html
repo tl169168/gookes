@@ -1,0 +1,333 @@
+<php>function _get_system_widget($name){</php>
+<switch name="name">
+
+
+    <case value="MainContributors">
+
+    </case>
+</switch>
+
+
+<php>}</php>
+
+<include file="public@header"/>
+<style>
+    .home-info li em {
+        float: left;
+        width: 120px;
+        font-style: normal;
+        font-weight: bold;
+    }
+
+    .home-info ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .panel {
+        margin-bottom: 0;
+    }
+
+    .grid-sizer {
+        width: 10%;
+    }
+
+    .grid-item {
+        margin-bottom: 5px;
+        padding: 5px;
+    }
+
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+        padding-left: 5px;
+        padding-right: 5px;
+        float: none;
+    }
+
+</style>
+<hook name="admin_before_head_end"/>
+</head>
+<body>
+<div class="wrap">
+
+    <div class="page" align="center">
+        <section class="demo">
+            <div class="demo_con">
+                <button type="button" class="button red" style="width:48%; height: 150px;">
+                    <div>总访问量：{$db2['login2']} </div>
+                    <div>有效访问：{$db1['login1']}</div>
+                    <div>无效访问 :{$db2['login2']-$db1['login1']}</div>
+                </button>
+               <a target="_blank" href="{:url('portal/AdminArticle/liuyan')}">
+                   <button type="button" class="button yellow" style="width:48%; height: 150px;">
+                    <div>评论：{$message}</div>
+                    <div>有效：{$message1}</div>
+                    <div>无效：{$message2}</div>
+                </button>
+               </a>
+                <a target="_blank" href="{:url('portal/AdminArticle/index')}">
+                <button type="button" class="button green" style="width:48%; height: 150px;">
+                    <div>文章：共：{$wenz}</div>
+                    <div>有效：共：{$wenz1}</div>
+                    <div>已删除：共：{$wenz2}</div>
+                </button>
+                </a>
+                <a target="_blank" href="{:url('mall/AdminItem/index')}">
+                <button type="button" class="button blue" style="width:48%; height: 150px;">
+                    <div>课程：共：{$sp}</div>
+                    <div>发布：共：{$sp1}</div>
+                    <div>删除：共：{$sp2}</div>
+                </button>
+                </a>
+            </div>
+        </section>
+    </div>
+   <!-- <div class="panel panel-default" style="margin-bottom: 20px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">后台</h3>
+        </div>
+        <div class="panel-body home-info">
+            <ul class="list-inline">
+                <div>公司： {$site_info.site_icpecc|default=''}</div> <br />
+                <div>备案号： {$site_info.site_gwa1|default=''}</div> <br />
+                <div>地址： {$site_info.site_admin_email|default=''}</div> <br />
+                <div>邮箱： {$site_info.site_admin_emailen|default=''}</div> <br />
+                <div>网    址：{$site_info.site_admin_emailenqq|default=''} </div>
+            </ul>
+        </div>
+    </div>-->
+    <!--<if condition="$db neq 0">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"></h3>
+        </div>
+        <div class="panel-body home-info">
+            <ul class="list-inline">
+                <li>有{$db}条留言未读 </li>
+                <li><a class="J_menuItem" href="{:url('portal/AdminArticle/liuyan')}">查看 </a> </li>
+            </ul>
+        </div>
+    </div>
+    </if>-->
+
+
+    <div class="home-grid">
+        <!-- width of .grid-sizer used for columnWidth -->
+        <div class="grid-sizer"></div>
+        <foreach name="dashboard_widgets" item="vo">
+            <if condition="$vo.is_system">
+                <div class="grid-item col-md-12" data-system="1" data-widget="{$vo.name}">
+                    <div class="dashboard-box">{:_get_system_widget($vo.name)}</div>
+                </div>
+                <else/>
+                <present name="dashboard_widget_plugins[$vo['name']]">
+                    <div class="grid-item col-md-{$dashboard_widget_plugins[$vo['name']]['width']}" data-system="0"
+                         data-widget="{$vo.name}">
+                        <div class="dashboard-box">{$dashboard_widget_plugins[$vo.name]['view']}</div>
+                    </div>
+                </present>
+
+            </if>
+
+        </foreach>
+    </div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<php>
+    $lang_set=defined('LANG_SET')?LANG_SET:'';
+    $thinkcmf_version=defined('THINKCMF_VERSION')?THINKCMF_VERSION:'';
+</php>
+<script>
+
+    Wind.css('dragula');
+    Wind.use('masonry', 'imagesloaded', 'dragula', function () {
+        var $homeGrid = $('.home-grid').masonry({
+            // set itemSelector so .grid-sizer is not used in layout
+            itemSelector: '.grid-item',
+            // use element for option
+            columnWidth: '.grid-sizer',
+            percentPosition: true,
+            horizontalOrder: false,
+            transitionDuration: 0
+        });
+
+        $homeGrid.masonry('on', 'layoutComplete', function (event, laidOutItems) {
+        });
+
+
+        $homeGrid.masonry();
+
+        var containers = [];
+        $('.home-grid .grid-item').each(function () {
+            containers.push(this);
+        });
+        dragula(containers, {
+            isContainer: function (el) {
+                return false; // only elements in drake.containers will be taken into account
+            },
+            moves: function (el, source, handle, sibling) {
+                return true; // elements are always draggable by default
+            },
+            accepts: function (el, target, source, sibling) {
+                return true; // elements can be dropped in any of the `containers` by default
+            },
+            invalid: function (el, handle) {
+                return false; // don't prevent any drags from initiating by default
+            },
+            direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
+            copy: false,                       // elements are moved by default, not copied
+            copySortSource: false,             // elements in copy-source containers can be reordered
+            revertOnSpill: false,              // spilling will put the element back where it was dragged from, if this is true
+            removeOnSpill: false,              // spilling will `.remove` the element, if this is true
+            mirrorContainer: document.body,    // set the element that gets mirror elements appended
+            ignoreInputTextSelection: true     // allows users to select input text, see details below
+        }).on('drop', function (el, target, source, sibling) {
+            var $target          = $(target);
+            var targetClasses    = $target.attr('class');
+            var targetDataWidget = $target.data('widget');
+            var targetDataSystem = $target.data('system');
+            var $source          = $(source);
+            var sourceClasses    = $source.attr('class');
+            var sourceDataWidget = $source.data('widget');
+            var sourceDataSystem = $source.data('system');
+            $(source).append($(target).find('.dashboard-box').not('.gu-transit'));
+            $(target).append(el);
+            $target.attr('class', sourceClasses);
+            $target.data('widget', sourceDataWidget);
+            $target.data('system', sourceDataSystem);
+
+            $source.attr('class', targetClasses);
+            $source.data('widget', targetDataWidget);
+            $source.data('system', targetDataSystem);
+            $homeGrid.masonry();
+
+            _widgetSort();
+        }).on('shadow', function (el, container, source) {
+            $homeGrid.masonry();
+        });
+
+
+    });
+
+    function _widgetSort() {
+
+        var widgets = [];
+        $('.home-grid .grid-item').each(function () {
+            var $this = $(this);
+
+            widgets.push({
+                name: $this.data('widget'),
+                is_system: $this.data('system')
+            });
+        });
+
+        $.ajax({
+            url: "{:url('main/dashboardWidget')}",
+            type: 'post',
+            dataType: 'json',
+            data: {widgets: widgets},
+            success: function (data) {
+
+            },
+            error: function () {
+
+            },
+            complete: function () {
+
+            }
+        });
+    }
+
+    //获取官方通知
+    $.getJSON("//www.thinkcmf.com/service/sms_jsonp.php?lang={$lang_set}&v={$thinkcmf_version}&callback=?",
+        function (data) {
+            var tpl      = '<li><em class="title"></em><span class="content"></span></li>';
+            var $notices = $("#thinkcmf-notices");
+            $notices.empty();
+            if (data.length > 0) {
+                $('#thinkcmf-notices-grid').show();
+                $.each(data, function (i, n) {
+                    var $tpl = $(tpl);
+                    $(".title", $tpl).html(n.title);
+                    $(".content", $tpl).html(n.content);
+                    $notices.append($tpl);
+                });
+            } else {
+                $notices.append("<li>^_^,{:lang('NO_NOTICE')}~~</li>");
+            }
+
+        });
+</script>
+<style>
+    <style type="text/css">
+                          body{
+                              background: #f5faff;
+                          }
+    .demo_con{
+
+    }
+    .button{
+        width: 140px;
+        line-height: 38px;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        text-shadow:1px 1px 1px #333;
+        border-radius: 5px;
+        margin:0 20px 20px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .button:nth-child(6n){
+        margin-right: 0;
+    }
+    .button.gray{
+        color: #8c96a0;
+        text-shadow:1px 1px 1px #fff;
+        border:1px solid #dce1e6;
+        box-shadow: 0 1px 2px #fff inset,0 -1px 0 #a8abae inset;
+        background: -webkit-linear-gradient(top,#f2f3f7,#e4e8ec);
+        background: -moz-linear-gradient(top,#f2f3f7,#e4e8ec);
+        background: linear-gradient(top,#f2f3f7,#e4e8ec);
+    }
+    .button.yellow{
+        border:1px solid #d2a000;
+        box-shadow: 0 1px 2px #fedd71 inset,0 -1px 0 #a38b39 inset,0 -2px 3px #fedd71 inset;
+        background: -webkit-linear-gradient(top,#fece34,#d8a605);
+        background: -moz-linear-gradient(top,#fece34,#d8a605);
+        background: linear-gradient(top,#fece34,#d8a605);
+    }
+    .button.green{
+        border:1px solid #64c878;
+        box-shadow: 0 1px 2px #b9ecc4 inset,0 -1px 0 #6c9f76 inset,0 -2px 3px #b9ecc4 inset;
+        background: -webkit-linear-gradient(top,#90dfa2,#84d494);
+        background: -moz-linear-gradient(top,#90dfa2,#84d494);
+        background: linear-gradient(top,#90dfa2,#84d494);
+    }
+    .button.blue{
+        border:1px solid #1e7db9;
+        box-shadow: 0 1px 2px #8fcaee inset,0 -1px 0 #497897 inset,0 -2px 3px #8fcaee inset;
+        background: -webkit-linear-gradient(top,#42a4e0,#2e88c0);
+        background: -moz-linear-gradient(top,#42a4e0,#2e88c0);
+        background: linear-gradient(top,#42a4e0,#2e88c0);
+    }
+    .gray:hover{
+        background: -webkit-linear-gradient(top,#fefefe,#ebeced);
+        background: -moz-linear-gradient(top,#f2f3f7,#ebeced);
+        background: linear-gradient(top,#f2f3f7,#ebeced);
+    }
+
+    .gray:active{
+        top:1px;
+        box-shadow: 0 1px 3px #a8abae inset,0 3px 0 #fff;
+        background: -webkit-linear-gradient(top,#e4e8ec,#e4e8ec);
+        background: -moz-linear-gradient(top,#e4e8ec,#e4e8ec);
+        background: linear-gradient(top,#e4e8ec,#e4e8ec);
+    }
+
+
+
+</style>
+</style>
+<hook name="admin_before_body_end"/>
+</body>
+</html>

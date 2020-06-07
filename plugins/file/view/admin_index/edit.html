@@ -1,0 +1,133 @@
+<include file="public/head"/>
+<include file="public/scripts"/>
+<body class="J_scroll_fixed">
+	<div class="wrap J_check_wrap">
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#">编辑文件</a>
+			</li>
+			<li>
+				<a href="javascript:history.go(-1)">返回目录</a>
+			</li>
+			<li><span style="color: red; size: 24px;">请在开发人员指导下操作，谢谢！！</span></li>
+		</ul>
+		<div class="common-form">
+			<link rel="stylesheet" href="/plugins/file/view/Js/CodeMirror/codemirror.css">
+			<link rel="stylesheet" href="/plugins/file/view/Js/CodeMirror/theme/mdn-like.css">
+			<script type="text/javascript" src="/plugins/file/view/Js/CodeMirror/codemirror.js"></script>
+			<script type="text/javascript" src="/plugins/file/view/Js/CodeMirror/xml.js"></script>
+			<script type="text/javascript" src="/plugins/file/view/Js/CodeMirror/javascript.js"></script>
+			<style>
+				.table td {
+					font-size: 14px;
+					line-height: 20px;
+				}
+				
+				.page a {
+					float: left;
+					padding: 4px 12px;
+					line-height: 20px;
+					text-decoration: none;
+					background-color: #fff;
+					border: 1px solid #ddd;
+					border-left-width: 0;
+				}
+				
+				.page span {
+					float: left;
+					padding: 4px 12px;
+					line-height: 20px;
+					text-decoration: none;
+					background-color: #fff;
+					border: 1px solid #ddd;
+				}
+				
+				.page .prev {
+					float: left;
+					padding: 4px 12px;
+					line-height: 20px;
+					text-decoration: none;
+					background-color: #fff;
+					border: 1px solid #ddd;
+				}
+				.CodeMirror{height: 500px;}
+			</style>
+
+			<div class="table_list">
+				<form action="{:cmf_plugin_url('File://AdminIndex/edit')}" method="post">
+					
+				
+				<table width="100%" class="table table-hover">
+
+					<tbody>
+						
+						<tr>
+							<td>文件地址:</td>
+							<td>
+								{$info.file}
+								<input type="hidden" name="file" value="{$info.file}">
+								<input type="hidden" name="root" value="{$Think.get.root}">
+								<input type="hidden" name="dir" value="{$Think.get.dir}">
+							</td>
+						</tr>
+						<tr>
+							<td>文件名称:</td>
+							<td>
+								<input type="text" name="title_new" value="{$info.title}">
+								<input type="hidden" name="title" value="{$info.title}">
+							</td>
+						</tr>
+						<tr>
+							<td width="60">文件内容:</td>
+							<td >
+								
+								
+								
+								<textarea id="content" name="content">{$info['content']}</textarea>
+								<script type="text/javascript">
+								$(function(){
+								    var mirror_option = {
+								        mode: "application/xml",
+								        lineNumbers   :true,//显示行号
+								        indentUnit    :4,//缩进空格数
+								        smartIndent   :true,//智能缩进
+								        theme         :"mdn-like",//主题
+								
+								        matchBrackets :true,
+								        gutter        :true,
+								        fixedGutter   :true,
+								        indentWithTabs:true,
+								        readOnly      :false,
+								        lineWrapping  :true,
+								        height        :600,
+								        enterMode     :"keep",
+								        tabMode       :"shift",
+								    };
+								    var mirror_area = document.getElementById("content");
+								    var mirror = CodeMirror.fromTextArea(mirror_area, mirror_option);
+								    <notempty name="value">
+								    var mirror_data = {:json_encode($value)};
+								    mirror.setValue(mirror_data);
+								    </notempty>
+								});
+								</script>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="submit" class="btn btn-blue" style="background-color: #5BC0DE;"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+	
+				</form>
+			</div>
+			
+		</div>
+	</div>
+
+</body>
+
+</html>

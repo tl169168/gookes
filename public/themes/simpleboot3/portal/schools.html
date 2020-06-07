@@ -1,0 +1,70 @@
+<include file="public@head">
+	<div class="gkcover"></div>
+	<div class="page-banner anim_emt fadein">
+		<div class="picbox"><img class="anim_emt zoom_in" src="{:cmf_get_image_preview_url($hdp.image)}" alt="果壳学院"></div>
+		<div class="infobox">
+			<div class="infobox-wrap">
+				<h3 class="title">果壳学院</h3>
+				<h4 class="des">一站式实战就业设计培训平台</h4>
+				<form class="school-search" action="{$school}" method="get" enctype="application/x-www-form-urlencoded">
+					<input class="form-control" type="text" name="k" placeholder="站内搜索">
+					<button class="form-btn"><img src="__TMPL__/public/assets/images/whiteg.png"></button>
+				</form>
+				<div class="intro">
+					<h3 class="intro-title">学院介绍</h3>
+					<div class="intro-des">果壳学院由果壳设计创始人、产品战略专家，产品策划人，知名工业设计师、高级工程师创建于2018年1月,坐落于深圳宝安区通信科技大厦A座702,以果壳设计为依托,汇聚国内优秀教育力量,建设一站式实战就业设计培训平台。</div>
+				</div>
+			</div>
+		</div>
+		<div class="insbottom">
+			<ul class="instool-list">
+				<li class="item">
+					<span class="i i1"></span>
+					<div class="info">
+						<img src="images/bphone.jpg">
+					</div>
+				</li>
+				<li class="item">
+					<span class="i i2"></span>
+					<div class="info">
+						<img src="images/wx1.jpg">
+					</div>
+				</li>
+				<li class="item">
+					<span class="i i3"></span>
+					<div class="info">
+						<img src="images/bqq.jpg">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- 设计培训平台 -->
+
+
+		<div class="platform-head">
+			<h3 class="title">搜索结果</h3>
+		</div>
+		<div class="platform-body platformSwiper swiper-container">
+			<ul class="learning-list swiper-wrapper">
+				<volist name="news" id="item">
+				<li class="item swiper-slide">
+					<a href="{$item.url}">
+						<div class="picbox">
+							<img src="{:cmf_get_image_preview_url($item.thumbnail)}" alt="{$item.title}">
+						</div>
+						<div class="infobox">
+							<h3 class="title"><span>{$item.title}</span></h3>
+						</div>
+					</a>
+				</li>
+				</volist>
+			</ul>
+			<div class="learning-btn-prev learning-btn"></div>
+			<div class="learning-btn-next learning-btn">›</div>
+		</div>
+	</div>
+
+	<!-- 设计培训平台 end -->
+	<!-- 人物访谈 end -->
+	<include file="public@foot">

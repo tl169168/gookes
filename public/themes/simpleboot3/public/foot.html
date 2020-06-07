@@ -1,0 +1,44 @@
+<div class="footer">
+    <div class="footer-logo">
+        <h3 class="l"><img src="__TMPL__/public/assets/images/gooke.png" alt="深圳果壳创新设计有限公司"></h3>
+        <h4 class="name">{$site_info.site_icpecc|default=''}</h4>
+        <span class="site">{$site_info.site_admin_emailenqq|default=''}</span>
+    </div>
+    <div class="footer-side">
+        <div class="item">
+            {$site_info.site_admin_emaildibu|default=''|html_entity_decode}
+                <p><a href="{$site_info.site_gwa1dizhik|default=''}">{$site_info.site_gwa1|default=''}</a></p>
+            </div>
+            <div class="footer-tool">
+                <a href="javascript:;">
+                    <img alt="深圳果壳创新设计有限公司" class="wx" src="__TMPL__/public/assets/images/wx2.png">
+                    <div class="info">
+                        <img src="__TMPL__/public/assets/images/wx1.jpg">
+                    </div>
+                </a>
+                <a href="javascript:;">
+                    <img alt="深圳果壳创新设计有限公司" src="__TMPL__/public/assets/images/fqq.png">
+                    <div class="info">
+                        <img src="__TMPL__/public/assets/images/bqq.jpg">
+                    </div>
+                </a>
+                <a href="javascript:;">
+                    <img alt="深圳果壳创新设计有限公司" src="__TMPL__/public/assets/images/fphone.png">
+                    <div class="info">
+                        <img src="__TMPL__/public/assets/images/bphone.jpg">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="friend-link">
+        <span class="label">友情链接：</span>
+        <volist name="yqlj" id="vo">
+        <a href="{$vo.url}" target="_blank">{$vo.name}</a>
+        </volist>
+    </div>
+</div>
+</div>
+<script src="__TMPL__/public/assets/js/site.js"></script>
+</body>
+</html>

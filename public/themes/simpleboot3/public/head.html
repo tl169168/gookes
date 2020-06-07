@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Pragma" content="no-cache">
+    <if condition="$kewordse.seo_title neq ''">
+        <title>{$kewordse.seo_title}</title>
+        <elseif condition="$kewords.post_title neq ''">
+            <title>{$kewords.post_title}</title>
+            <else />
+            <title>{$site_info.site_seo_title|default=''}</title>
+    </if>
+
+    <if condition="$kewordse.seo_keywords neq ''">
+        <meta name="keywords" content="{$kewordse.seo_keywords}" />
+        <elseif condition="$kewords.post_keywords neq ''">
+            <meta name="keywords" content="{$kewords.post_keywords}" />
+            <else />
+            <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}" />
+    </if>
+
+    <if condition="$kewordse.seo_description neq ''">
+        <meta name="description" content="{$kewordse.seo_description}" />
+        <elseif condition="$kewords.post_excerpt neq ''">
+            <meta name="description" content="{$kewords.post_excerpt}" />
+            <else />
+            <meta name="description" content="{$site_info.site_seo_description|default=''}" />
+    </if>
+    <link rel="icon" href="__img__/favicon.ico" type="image/png">
+        <link rel="stylesheet" href="__TMPL__/public/assets/css/swiper.min.css">
+        <link rel="stylesheet" href="__TMPL__/public/assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="__TMPL__/public/assets/css/style.css">
+        <script src="__TMPL__/public/assets/js/jquery-1.11.3.min.js"></script>
+        <script src="__TMPL__/public/assets/js/swiper.jquery.min.js"></script>
+        <script src="__TMPL__/public/assets/js/owl.carousel.js"></script>
+
+
+
+    <link rel="stylesheet" href="__TMPL__/public/assets/css/comment.css">
+
+    </head>
+<body>
+<div class="gkheader">
+    <h1 class="logo"><a href="{$index}"><img src="__TMPL__/public/assets/images/logo.png" alt="gooke">gooke</a></h1>
+    <nav class="nav">
+        <ul class="nav-list">
+<!--            <li class="item"><a href="{$index}" title="首页"><span class="text" data-title="HOME">首页</span></a></li>-->
+            <volist name="bt" id="vo">
+            <li class="item"><a href="{$vo.href}" title="{$vo.name}"><span class="text" data-title="{$vo.namem}">{$vo.name}</span></a>
+                <ul class="subnav-list">
+                    <volist name="$vo.data" id="item">
+                    <li class="subitem"><a href="{$item.href}">{$item.name}</a></li>
+                    </volist>
+                </ul>
+            </li>
+            </volist>
+        </ul>
+    </nav>
+    <div class="menubtn"></div>
+</div>

@@ -1,0 +1,231 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+</style>
+<body>
+<script type="text/javascript">
+    function onc(){
+        var files = document.getElementById("input").files;
+        for(var i=0; i< files.length; i++){
+            // alert(input.files[i].name);
+        }
+    }
+</script>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminArticle/index')}">文章管理</a></li>
+        <li><a href="{:url('AdminArticle/add')}">添加文章</a></li>
+        <li  class="active"> <a href="{:url('AdminArticle/uploadMultiImage')}">
+            批量添加</a></li>
+    </ul>
+    <form action="{:url('AdminArticle/uploadMultiImages')}"
+          enctype="multipart/form-data" method="post" class="form-horizontal js-
+ajax-form margin-top-20">
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered" style="">
+                    <tr>
+                        <th width="100">分类<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;"
+                                   required value=""
+                                   placeholder="请选择分类" onclick="doSelectCategory();"
+                                   id="js-categories-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" name="idces"
+                                   id="js-categories-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>选择图片)<span class="form-required">*</span></th>
+                        <td>
+                            <input type="file" id="input" name="image[]" onchange="onc()"
+                                   multiple="multiple" />
+                            <!--                <input type="hidden" value="{$id}" name="id">-->
+                        </td>
+                        <!-- <td>
+                             <input type="submit"  value="提交"></td>-->
+                    </tr>
+                    <tr>
+                        <th>标题(中)<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="title"
+                                   id="title" required value="" placeholder="请输入标题"/>
+                            <input class="form-control" type="hidden" value="{$id}"
+                                   name="categories"
+                                   id="js-categories-id-input"/>
+                            <p class="help-block">多标题之间用英文逗号隔开</p>
+                        </td>
+                    </tr>
+                    <if condition="$db eq 1">
+                        <tr>
+                            <th>标题(美)<span class="form-required">*</span></th>
+                            <td>
+                                <input class="form-control" type="text" name="post_titleen"
+                                       id="titlem" required value="" placeholder="请输入标题"/>
+                                <input  type="hidden" style="float:left;" name="en"
+                                        id="keyword" value="１"
+                                        placeholder="请输入标题">
+                                <p class="help-block">多标题之间用英文逗号隔开</p>
+                            </td>
+                        </tr>
+                        <else />
+                    </if>
+                    <tr>
+                        <th>关键词</th>
+                        <td>
+                            <input class="form-control" type="text" name="post_keywords"
+                                   id="keywords" value=""
+                                   placeholder="请输入关键字">
+                            <p class="help-block">关键词</p>
+                        </td>
+                    </tr>
+                    <if condition="$db eq 1">
+                        <tr>
+                            <th>关键词(EN)</th>
+                            <td>
+                                <input class="form-control" type="text"
+                                       name="post_keywordsen" id="keywords" value=""
+                                       placeholder="请输入关键字">
+                                <p class="help-block">keywords</p>
+                            </td>
+                        </tr>
+                        <else />
+                    </if>
+                    <tr>
+                        <th>文章来源</th>
+                        <td><input class="form-control" type="text" name="post_source"
+                                   id="source" value=""
+                                   placeholder="请输入文章来源"></td>
+                    </tr>
+                    <if condition="$db eq 1">
+                        <tr>
+                            <th>文章来源(EN)</th>
+                            <td><input class="form-control" type="text"
+                                       name="post_sourceen" id="source" value=""
+                                       placeholder="请输入文章来源"></td>
+                        </tr>
+                        <else />
+                    </if>
+                    <tr>
+                        <th>摘要</th>
+                        <td>
+                            <textarea class="form-control" name="post_excerpt"
+                                      style="height: 50px;"
+                                      placeholder="请填写摘要"></textarea>
+                        </td>
+                    </tr>
+                    <if condition="$db eq 1">
+                        <tr>
+                            <th>摘要(EN)</th>
+                            <td>
+                            <textarea class="form-control" name="post_excerpten"
+                                      style="height: 50px;"
+                                      placeholder="请填写摘要" id=""></textarea>
+                            </td>
+                        </tr>
+                        <else />
+                    </if>
+                    <tr>
+                        <th>内容</th>
+                        <td>
+                            <script type="text/plain" id="content"
+                                    name="post_content"></script>
+                        </td>
+                    </tr>
+                    <if condition="$db eq 1">
+                        <tr>
+                            <th>内容(EN)</th>
+                            <td>
+                                <script type="text/plain" id="content1"
+                                        name="post_contenten"></script>
+                            </td>
+                        </tr>
+                        <else />
+                    </if>
+                </table>
+            </div>
+        </div>
+        <div class="form-group1">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">
+                    {:lang('ADD')}</button>
+                <!--                        <a class="btn btn-default" href="{:url
+    ('AdminArticle/index')}">{:lang('BACK')}</a>-->
+            </div>
+        </div>
+    </form>
+    <!--<p>请尝试在浏览文件时选取一个以上的文件。</p>-->
+</div>
+</body>
+<style>
+    body{ padding-bottom:50px;}
+    .form-group1{
+        position:fixed; left:0px; bottom:0px; width:100%; height:50px;
+        background-color:RGB(249,246,246); z-index:9999;
+    }
+    .form-group1 button{
+        margin-left: 68%;
+        width: 87px;
+        font-size: 18px;
+    }
+</style>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript"
+        src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript"
+        src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        UE.getEditor("content");
+        UE.getEditor("content1");
+        UE.getEditor("content2");
+        UE.getEditor("content3");
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src',
+                '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+
+    function doSelectCategory() {
+        var selectedCategoriesId = $('#js-categories-id-input').val();
+        openIframeLayer("{:url('AdminCategory/select')}?ids=" +
+            selectedCategoriesId, '请选择分类', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedCategories = iframeWin.confirm();
+                if (selectedCategories.selectedCategoriesId.length == 0) {
+                    layer.msg('请选择分类');
+                    return;
+                }
+                $('#js-categories-id-input').val
+                (selectedCategories.selectedCategoriesId.join(','));
+                $('#js-categories-name-input').val
+                (selectedCategories.selectedCategoriesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+</script>
+</body>
+</html>

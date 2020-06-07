@@ -1,0 +1,61 @@
+<include file="public@head">
+	<div class="gkcover"></div>
+	<div class="page-banner">
+		<div class="insbottom">
+			<ul class="instool-list">
+				<li class="item">
+					<span class="i i1"></span>
+					<div class="info">
+						<img src="__TMPL__/public/assets/images/bphone.jpg">
+					</div>
+				</li>
+				<li class="item">
+					<span class="i i2"></span>
+					<div class="info">
+						<img src="__TMPL__/public/assets/images/wx1.jpg">
+					</div>
+				</li>
+				<li class="item">
+					<span class="i i3"></span>
+					<div class="info">
+						<img src="__TMPL__/public/assets/images/bqq.jpg">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<volist name="gsxw4" id="vo" key="k" length="3">
+		<div class="supplychain anim_emt bottom2top" id="supplyAimpoint{$k}">
+			<div class="fixratio-wrap">
+				<a href="{$vo.url}">
+					<div class="picbox"><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="{$vo.name}}"></div>
+					<div class="infobox">
+						<h3 class="title title-en">{$vo.namem|html_entity_decode}</h3>
+						<h4 class="title title-cn">{$vo.name}</h4>
+						<div class="line"></div>
+						<div class="text">
+							{$vo.description|html_entity_decode}
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</volist>
+	<volist name="gsxw4" id="vo" key="k" offset="3" length="3">
+	<div class="supplychain anim_emt bottom2top" id="supplyAimpoint{$vo.ids}">
+		<div class="fixratio-wrap">
+			<a href="{$vo.url}">
+				<div class="picbox"><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="品牌战略规划"></div>
+				<div class="infobox right">
+					<h3 class="title title-en">{$vo.namem|html_entity_decode} </h3>
+					<h4 class="title title-cn">{$vo.name}</h4>
+					<div class="line"></div>
+					<div class="text">
+						{$vo.description|html_entity_decode}
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+	</volist>
+	<include file="public@foot">

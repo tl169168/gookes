@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>查看中心</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<ul class="nav nav-tabs">
+    <li><a href="javascript:history.go(-1);">返回首页</a></li>
+</ul>
+<table class="table table-hover table-bordered table-list" style="margin-left: 1%;">
+    <div align="center"><h3>留言查看中心</h3></div>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>E-mail</th>
+        <th>标题</th>
+        <th>时间</th>
+        <th>留言内容</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+<volist name="db" id="vo" key="k">
+    <tr class="active" >
+        <td>{$k}</td>
+        <td>{$vo.username}</td>
+        <td>{$vo.phone}</td>
+        <td>{$vo.Email}</td>
+        <td>{$vo.address}</td>
+        <td>{$vo.data}</td>
+        <td title="{$vo.content}">{$vo.content|mb_substr=0,16,'utf-8'}...</td>
+        <if condition="$vo.lain eq 1">
+        <td><button>已读</button>
+            <button onclick="button1(this)" id="{$vo.id}" style="background: red; color: #0c0c0c;">删除
+        </button></td>
+            <else />
+            <td><button onclick="button(this)" id="{$vo.id}" style="background: red; color: #0c0c0c;">未读</button>
+                <button onclick="button1(this)" id="{$vo.id}" style="background: red; color: #0c0c0c;">删除</button></td>
+        </if>
+    </tr>
+</volist>
+    </tbody>
+</table>
+<ul class="pagination">{$page|default=''}</ul>
+<script>
+    function button(obj) {
+        var id=obj.id;
+        $.ajax({
+            type:"post",
+            data:{id:id},
+            url:"{:url('liuyanfk')}",
+            success:function (data) {
+                console.log(data);
+                if (data==1){
+                    alert("操作成功");
+                    location.reload();
+                }else{
+                    alert("操作失败");
+                }
+            }
+        });
+    }
+    function button1(obj) {
+        var id=obj.id;
+        $.ajax({
+            type:"post",
+            data:{id:id},
+            url:"{:url('liuyanfk1')}",
+            success:function (data) {
+                console.log(data);
+                if (data==1){
+                    alert("操作成功");
+                    location.reload();
+                }else{
+                    alert("操作失败");
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

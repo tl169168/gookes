@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>留言列表 -- HoverTree</title>
+    <style>
+        .keleyitable {
+            width: 800px;
+        }
+
+        .keleyitable table, td, th {
+            border: 1px solid green;margin-top:10px;
+        }
+        .klytd {width:100px;text-align:right
+        }
+        .hvttd {
+            width:500px}
+    </style>
+
+</head>
+<body>
+<div style="margin:0px auto;" class="keleyitable"><h2>留言列表</h2>
+    <volist name="data" id="val" empty="暂时没有数据">
+    <table>
+        <tr><td class="klytd">留言时间：</td><td class="hvttd">{$val.addtime}</td></tr>
+        <tr><td class="klytd">留言人：</td><td class ="hvttd">{$val.name}</td></tr>
+        <tr><td class="klytd">电话：</td><td class ="hvttd">{$val.phone}</td></tr>
+        <tr><td class="klytd">地区：</td><td class ="hvttd">{$val.sub}</td></tr>
+        <tr><td class="klytd">留言：</td><td class="hvttd">{$val.mess}</td></tr>
+    </table>
+    </volist>
+</div>
+<div align="center" class="hbcord">
+    {$data->render()}
+</div>
+<div style="width:800px;margin:10px auto;font-family:Arial, Helvetica, sans-serif;text-align:center;"> </div>
+<!--最近打算开发一个留言板,asp.net的开源项目，http://hovertree.codeplex.com -->
+</body>
+</html>

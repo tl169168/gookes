@@ -1,0 +1,108 @@
+
+<include file="public/head"/>
+<body class="J_scroll_fixed">
+	<div class="wrap J_check_wrap">
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a href="#">文件列表</a>
+			</li>
+			<!--<li>
+				<a href="{:cmf_plugin_url('File://AdminIndex/add')}">在当前目录下添加文件</a>
+			</li>-->
+			<li><span style="color: red; size: 24px;">请在开发人员指导下操作，谢谢！！</span></li>
+		</ul>
+		<div class="common-form">
+
+			<style>
+				.table td {
+					font-size: 14px;
+					line-height: 20px;
+				}
+				
+				.page a {
+					float: left;
+					padding: 4px 12px;
+					line-height: 20px;
+					text-decoration: none;
+					background-color: #fff;
+					border: 1px solid #ddd;
+					border-left-width: 0;
+				}
+				
+				.page span {
+					float: left;
+					padding: 4px 12px;
+					line-height: 20px;
+					text-decoration: none;
+					background-color: #fff;
+					border: 1px solid #ddd;
+				}
+				
+				.page .prev {
+					float: left;
+					padding: 4px 12px;
+					line-height: 20px;
+					text-decoration: none;
+					background-color: #fff;
+					border: 1px solid #ddd;
+				}
+			</style>
+
+			<div class="table_list">
+
+				<table width="100%" class="table table-hover">
+					<thead>
+						<tr>
+							<th width="40"> 文件列表</th>
+							<th width="200">操作</th>
+
+						</tr>
+						<tr>
+							<td style="color: #A5A5A5;">当前目录地址: {$path_now}</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+
+						    <tr>
+						        <td><a href="{:cmf_plugin_url('File://AdminIndex/index')}?dir={$back}"><img src="/plugins/file/view/Img/ext/dir.gif" /> 返回上一层</a></td>
+						        <td></td>
+						    </tr>
+
+						<foreach name="list" item="v">
+							<tr>
+								<if condition="$v['is_edit']">
+									<td>
+										<a href="{:cmf_plugin_url('File://AdminIndex/edit')}?dir={$v['dir']}" data="{$v['dir']}"><img src="{$v.ext_img}" style="width: 20px;" /> {$v.name}</a>
+									</td>
+								
+									
+									<td>
+										<a class="btn btn-blue" href="{:cmf_plugin_url('File://AdminIndex/edit')}?dir={$v['dir']}" style="background-color: #5BC0DE;color: #fff;">修改</a>
+										<a class="AjaxConfirm btn btn-red"  href="{:cmf_plugin_url('File://AdminIndex/del')}?dir={$v['dir']}" style="background-color: red;color: #fff;">删除</a>
+									</td>
+									<elseif condition="$v['ext'] == 'dir'" />
+									<td>
+										<a href="{:cmf_plugin_url('File://AdminIndex/index')}?dir={$v['dir']}" data="{$v['dir']}"><img src="{$v.ext_img}" /> {$v.name}</a>
+									</td>
+									<td></td>
+									<else />
+									<td><img src="{$v.ext_img}" style="width: 20px;"/> {$v.name}</td>
+									<td>
+										<a class="AjaxConfirm btn btn-red"  href="{:cmf_plugin_url('File://AdminIndex/del')}?dir={$v['dir']}">删除</a>
+									</td>
+								</if>
+							</tr>
+						</foreach>
+
+					</tbody>
+				</table>
+
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<style>
+    <eq name="isgray" value="1">
+    html {-webkit-filter: grayscale(100%);filter: gray;filter: grayscale(100%);filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);};
+    </eq>
+    <eq name="isbgcolor" value="1">
+    body{background:{$bgcolor} !important;}
+    </eq>
+</style>
+<eq name="notice" value="1">
+    <link rel="stylesheet" type="text/css" href="__PLUGIN_TMPL__/notice-box.css"/>
+    <div class="notice-wrap"><div class="notice-bg"></div><div class="notice-box">{$noticetext}<span class="xyclose">&times;</span></div><div class="notice-mini">M</div></div>
+</eq>
+<script type="text/javascript">var zbPath="{:url('/',array(),true,true)}", noRmenu = "{$rightclick}", noSelect = "{$noselect}", noCopy = "{$nocopy}", noDisimg = "{$saveimg}", newOpen = "{$newopen}", noF5 = "{$nof5}", noF12 = "{$nof12}", noIframe = "{$noiframe}", noSaveimg = "{$saveisimg}", closeSite = "{$closeweb}", closeTips = "{$closewebtext}", noticeSet = "{$notice}", noticeStime = "{$noticest}", noticeEtime = "{$noticeed}", tipShow = "{$tipshow}", closeMsg = "{$closemsg}";</script>
+
+<script src="__PLUGIN_TMPL__/js/jsctrl.js" type="text/javascript"></script>

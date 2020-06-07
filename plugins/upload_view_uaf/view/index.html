@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- HTML5 shim for IE8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+
+
+    <link href="__PLUGIN_ROOT__/public/assets/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    form .input-order {
+        margin-bottom: 0px;
+        padding: 0 2px;
+        width: 42px;
+        font-size: 12px;
+    }
+
+    form .input-order:focus {
+        outline: none;
+    }
+
+    .table-actions {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding: 0px;
+    }
+
+    .table-list {
+        margin-bottom: 0px;
+    }
+
+    .form-required {
+        color: red;
+    }
+    .row > div {
+        margin-bottom: 6px;
+        margin-top: 4px;
+    }
+    
+
+    .col-md-4 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+
+    }
+
+    .item {
+        position: relative;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        background-color: #eee;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        height: 80px;
+        cursor:pointer;
+    }
+
+    .item:hover {
+        border: {$config['border']}px solid {$config['color']};
+    }
+
+    .itemdone {
+        border: {$config['border']}px solid {$config['color']};
+    }
+
+    .name {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        line-height: 34px;
+        background: rgba(0, 0, 0, .5);
+        color: #fff;
+        z-index: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; 
+        top: 50px;
+    }
+
+    .pagination {
+        position: absolute;
+        bottom: 0px;
+    }
+
+    #detail {
+        background-color: #ffffff;
+        display: none;
+        position: absolute;
+        z-index: 999;
+        top: 0px;
+        left: 0px;
+        border: 1px solid #dddddd;
+    }
+
+    </style>
+   
+    <script src="/public/static/js/jquery.js"></script>
+   
+
+</head>
+<body>
+
+
+
+<div class="">
+	<div class="row">
+		<foreach name="assets" item="vo">
+	
+			<div class="col-md-4 col-sm-6">
+                <?php 
+                    $t = cmf_get_upload_setting();
+                    $t = $t['file_types']['image']['extensions'];
+                    
+                ?>
+				<div class="item" style="background-image: url({:strpos($t,$vo['suffix'])!== false?'/upload/'.$vo['file_path']:'__PLUGIN_ROOT__/public/assets/file.jpg';})" data-url="{$vo['file_path']}" data-name='{$vo.filename}'>
+
+					<div class="name ng-binding">{$vo.filename}</div>
+                    <div id="detail"></div>
+				</div>
+				
+			</div>
+
+		</foreach>
+
+
+	</div>
+</div>
+<div class="pagination">{$page|default=''}</div>
+
+<script>
+	$(".item").click(function(){
+
+		//清除选定边框
+		$(".item").removeClass('itemdone');
+		//添加选定边框
+
+		$(this).addClass('itemdone');
+		
+		var url = $(this).attr('data-url');
+		
+		var info = $("#info",parent.document);
+
+		info.attr('value','{:cmf_get_domain();}{:cmf_get_root();}'+'/upload/'+url);
+
+	});
+
+    $(".item").mouseover(function (e) {
+        
+        $("#detail").css({"top":(e.pageY+10)+"px","left":(e.pageX+10)+"px"});
+        $('#detail').text($(this).attr('data-name'));
+        $('#detail').show();
+    });
+    $(".item").mouseout(function () {
+        
+        $('#detail').hide();
+    });
+
+
+</script>
+</body>
+</html>
+
+

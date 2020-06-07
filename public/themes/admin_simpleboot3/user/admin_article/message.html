@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户留言</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="table-responsive">
+    <table class="table">
+        <div align="center">用户留言</div>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>姓名</th>
+            <th>手机</th>
+            <th>邮箱</th>
+            <th>公司名称</th>
+            <th>描述问题</th>
+            <th>时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="str" id="vo">
+        <tr>
+            <th>{$vo.id}</th>
+            <th>{$vo.username}</th>
+            <th>{$vo.mobile}</th>
+            <th>{$vo.email}</th>
+            <th>{$vo.companyname}</th>
+            <th>{$vo.mess}</th>
+            <th>{$vo.data}</th>
+        </tr>
+        </volist>
+        </tbody>
+    </table>
+    <div class="pagination">
+        {$str->render()}
+    </div><!--Page-->
+</div>
+
+</body>
+</html>

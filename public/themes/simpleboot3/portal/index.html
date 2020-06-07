@@ -1,0 +1,314 @@
+<include file="public@head">
+	<div class="gkcover"></div>
+	<div class="video-large-wrap">
+		<div id="video-close"></div>
+		<video id="video-large" src="__TMPL__/public/assets/5s.mp4" controls=""></video>
+	</div>
+	<div class="wevideo">
+		<div class="video-box">
+			<div class="video-wrap">
+				<video id="homevideo" src="5s.mp4" muted="" autoplay="" loop=""></video>
+				<div class="video-control">
+					<a href="{$about}"><img src="__TMPL__/public/assets/images/just.png" alt="恰到好处"></a>
+					<div class="playbtn" id="playbtn"></div>
+				</div>
+				<div class="insbottom">
+					<div class="text"><img src="__TMPL__/public/assets/images/gooke.png"> • 恰到好处<span class="foryou">一站式解决你所有的设计需求</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ul class="instool-list">
+		<li class="item">
+			<span class="i i1"></span>
+			<div class="info">
+				<img src="__TMPL__/public/assets/images/bphone.jpg">
+			</div>
+		</li>
+		<li class="item">
+			<span class="i i2"></span>
+			<div class="info">
+				<img src="__TMPL__/public/assets/images/wx1.jpg">
+			</div>
+		</li>
+		<li class="item">
+			<span class="i i3"></span>
+			<div class="info">
+				<img src="__TMPL__/public/assets/images/bqq.jpg">
+			</div>
+		</li>
+	</ul>
+	<div class="conten-wrap">
+		<div class="homeslide">
+			<div class="homeslide-box">
+				<div class="homeslide-wrap swiper-wrapper">
+					<volist name="hdp" id="vo">
+					<div class="item swiper-slide">
+						<a href="{$vo.url}">
+							<img src="{:cmf_get_image_preview_url($vo.image)}">
+						</a>
+					</div>
+					</volist>
+				</div>
+				<!-- Add Pagination -->
+				<div class="homeslide-dot swiper-pagination"></div>
+			</div>
+		</div>
+		<div class="wedo">
+			<ul class="wedo-list clearfix">
+				<volist name="gsxw4" id="vo">
+				<li class="item anim_emt bottom2top">
+					<a href="{$vo.url}" title="品牌设计">
+						<div class="picbox">
+							<img src="{:cmf_get_image_preview_url($vo.thumbnail)}">
+						</div>
+						<div class="textbox-wrap">
+							<div class="textbox">
+								<span class="title-en">BRAND DESIGN</span>
+								<h3 class="title-cn">{$vo.name}</h3>
+								<div class="takemore"><em>进一步了解</em><i class="rightarrow"></i></div>
+							</div>
+						</div>
+					</a>
+				</li>
+				</volist>
+			</ul>
+		</div>
+		<!-- MINISO 影院声霸蓝牙音箱 -->
+		<volist name="cjwt" id="vo">
+		<div class="section-series anim_emt bottom2top">
+			<div class="series-head">
+				<h3 class="tit1">{$vo.name}</h3>
+				<h4 class="tit2">{$vo.description|html_entity_decode}</h4>
+			</div>
+			<div class="series-body">
+				<ul class="series-list clearfix">
+					<volist name="$vo.data" id="item" length="1">
+					<li class="item double">
+						<a href="{$item.url}">
+							<div class="picbox">
+								<img src="{:cmf_get_image_preview_url($item.thumbnail)}" alt="{$item.post_title}">
+							</div>
+							<div class="textbox">
+								<div class="inner">
+									<h3 class="title">{$item.post_title}</h3>
+									<span class="text">{$item.post_keywords}</span>
+									<span class="text">{$item.post_contentm|html_entity_decode}</span>
+<!--									<span class="text">蓝牙音箱</span>-->
+									<span class="text more">more+</span>
+								</div>
+							</div>
+						</a>
+					</li>
+					</volist>
+					<volist name="$vo.data" id="item" offset="1" length="2">
+					<li class="item">
+						<a href="{$item.url}">
+							<div class="picbox">
+								<img src="{:cmf_get_image_preview_url($item.thumbnail)}" alt="{$item.post_title}">
+							</div>
+							<div class="textbox">
+								<div class="inner">
+									<h3 class="title">{$item.post_title}</h3>
+									<span class="text">{$item.post_keywords}</span>
+									<span class="text">{$item.post_contentm|html_entity_decode}</span>
+									<span class="text more">more+</span>
+								</div>
+							</div>
+						</a>
+					</li>
+					</volist>
+				</ul>
+			</div>
+		</div>
+		</volist>
+		<!-- MINISO 影院声霸蓝牙音箱 end -->
+
+		<!-- 个人护理系列 end -->
+		<div class="wecare anim_emt fadein">
+			<div class="fixratio">
+				<div class="fixratio-wrap">
+					<div class="letter"></div>
+					<div class="text">
+						GOOKE注重设计师的综合实力,
+					</div>
+					<div class="text text2">GOOKE注重设计师的综合实力.</div>
+					<ul class="wecare-list">
+						<li class="item">
+							<h3 class="num">10＋</h3>
+							<span class="des">年设计经验</span>
+						</li>
+						<li class="item">
+							<h3 class="num">10＋</h3>
+							<span class="des">专业设计团队</span>
+						</li>
+						<li class="item">
+							<h3 class="num">30＋</h3>
+							<span class="des">件国内外设计奖项</span>
+						</li>
+						<li class="item">
+							<h3 class="num">99＋</h3>
+							<span class="des">客户好评率</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="wecreate anim_emt fadein">
+			<div class="fixratio">
+				<div class="letter"></div>
+				<h3 class="title">深圳工业设计-策略-外观-结构-品牌-量产-果壳创新设计</h3>
+				<div class="des">果壳创新设计是一家一直聚焦关注泛行业的产品策略与品牌创新体验的设计公司,<br>
+						创立以来正是客户的期待与果壳创新设计的责任,<br>
+						推动着果壳创新设计稳健前行。
+				</div>
+				<div class="slogan">天工造物 恰到好处</div>
+			</div>
+		</div>
+		<div class="wedesign anim_emt fadein">
+			<div class="fixratio">
+				<div class="fixratio-wrap">
+					<div class="letter"></div>
+					<div class="design-title">对于设计,我们从不妥协</div>
+					<div class="design-text">恰到好处,一点不多,一点不少,力求把最好的设计服务提供给客户</div>
+					<ul class="wecare-list">
+						<li class="item">
+							<h3 class="num">10＋</h3>
+							<span class="des">年设计经验</span>
+						</li>
+						<li class="item">
+							<h3 class="num">10＋</h3>
+							<span class="des">专业设计团队</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="wepartner anim_emt fadein">
+			<div class="wepartner-wrap">
+				<div class="aside">
+					<div class="letter"></div>
+					<div class="text">曾服务过的企业</div>
+				</div>
+				<div class="realaside">
+					<div class="letter"></div>
+					<div class="text">曾服务过的企业</div>
+				</div>
+				<div class="partnerbox">
+					<div class="partner-list owl-carousel">
+
+						<div class="item">
+							<volist name="gsxwh" id="vo" length="4">
+							<div><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="huawei"></div>
+							</volist>
+						</div>
+
+						<div class="item">
+							<volist name="gsxwh" id="vo" offset="4" length="4">
+							<div><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="huawei"></div>
+							</volist>
+						</div>
+						<div class="item">
+							<volist name="gsxwh" id="vo" offset="8" length="4">
+								<div><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="huawei"></div>
+							</volist>
+						</div>
+						<div class="item">
+							<volist name="gsxwh" id="vo" offset="12" length="4">
+								<div><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="huawei"></div>
+							</volist>
+						</div>
+						<div class="item">
+							<volist name="gsxwh" id="vo" offset="0" length="4">
+								<div><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="huawei"></div>
+							</volist>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="wedesign insdesign anim_emt fadein">
+			<div class="letter"></div>
+			<div class="design-title">对于设计,我们从不妥协</div>
+			<div class="design-text">恰到好处,一点不多,一点不少,力求把最好的设计服务提供给客户</div>
+			<div class="fixratio">
+				<div class="rewardbox">
+					<div class="reward-list owl-carousel">
+						<volist name="hdp1" id="vo">
+							<div class="item">
+								<img src="{:cmf_get_image_preview_url($vo.image)}">
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			<div class="design-title" style="padding-bottom: 0;">设计视野</div>
+			<div class="design-text">设计视野英文</div>
+			<div class="vision-wrap">
+				<div class="vision">
+					<div class="vision-list owl-carousel">
+						<volist name="scp" id="vo">
+						<div class="item">
+							<a href="{$vo.url}">
+								<div class="picbox">
+									<img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="">
+								</div>
+								<div class="info">
+									<h3 class="title">点击文章进入（对应文章）设计视野三级页面</h3>
+									<div class="date">{$vo.create_time|date="Y-m-d",###}</div>
+								</div>
+							</a>
+						</div>
+						</volist>
+					</div>
+				</div>
+				<div class="more">
+					<a href="{:url('school')}">MORE+</a>
+				</div>
+			</div>
+		</div>
+		<div class="wecomment anim_emt fadein">
+			<div class="fixratio">
+				<div class="wecomment-inner clearfix">
+					<div class="wecomment-text">
+						<h3 class="title">不交流 无设计</h3>
+						<h4 class="des">让我们在一次次交流中碰撞出新的火花</h4>
+					</div>
+					<div class="comment-list-wrap">
+						<ul class="indexcomment-list">
+							<volist name="liyyan" id="vo" key="k">
+								<if condition="$k%2==0">
+							<li class="item">
+								<a href="">
+									<img src="__TMPL__/public/assets/images/avatar.jpg-avatar_webp">
+									<div class="comment-info">
+										<div class="user">匿名用户{$vo.create_time}</div>
+										<div class="post">{$vo.content}}</div>
+									</div>
+								</a>
+							</li>
+									<else />
+								</if>
+							</volist>
+						</ul>
+						<ul class="indexcomment-list indexcomment-list2">
+							<volist name="liyyan" id="vo" key="k">
+								<if condition="$k%2!=0">
+							<li class="item">
+								<a href="#">
+									<img src="__TMPL__/public/assets/images/avatar.jpg-avatar_webp">
+									<div class="comment-info">
+										<div class="user">匿名用户{$vo.create_time}</div>
+										<div class="post">{$vo.content}}</div>
+									</div>
+								</a>
+							</li>
+									<else />
+								</if>
+							</volist>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<include file="public@foot">

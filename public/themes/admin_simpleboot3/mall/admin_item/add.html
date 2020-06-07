@@ -1,0 +1,261 @@
+<include file="public@header"/>
+<style>
+    .input-no-border {
+        border: none;
+        padding: 0;
+        font-size: 14px;
+    }
+</style>
+</head>
+<script type="text/html" id="photos-item-tpl">
+    <li id="saved-image{id}">
+        <input id="photo-{id}" type="hidden" name="photo_urls[]" value="{filepath}">
+        <input class="form-control" id="photo-{id}-name" type="text" name="photo_names[]" value="{name}"
+               style="width: 200px;" title="图片名称">
+        <img id="photo-{id}-preview" src="{url}" style="height:36px;width: 36px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a href="javascript:uploadOneImage('图片上传','#photo-{id}');">替换</a>
+        <a href="javascript:(function(){$('#saved-image{id}').remove();})();">移除</a>
+    </li>
+</script>
+<script type="text/html" id="files-item-tpl">
+    <li id="saved-file{id}">
+        <input id="file-{id}" type="text" name="fujian" value="{filepath}">
+        <input class="form-control" id="file-{id}-name" type="text" name="file_names[]" value="{name}"
+               style="width: 200px;" title="文件名称">
+        <a id="file-{id}-preview" href="{preview_url}" target="_blank">下载</a>
+        <a href="javascript:uploadOne('文件上传','#file-{id}','file');">替换</a>
+        <a href="javascript:(function(){$('#saved-file{id}').remove();})();">移除</a>
+    </li>
+</script>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminItem/index')}">课程列表</a></li>
+        <li class="active"><a href="{:url('AdminItem/add')}">添加课程</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminItem/addPost')}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                <span class="form-required">*</span>分类
+            </label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="category_id" id="input-category_id">
+                    {$categories_tree}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-title" class="col-sm-2 control-label">
+                <span class="form-required">*</span>课程名称(中)
+            </label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-title" name="title">
+            </div>
+        </div>
+        <if condition="$db eq 1">
+        <div class="form-group">
+            <label for="input-title" class="col-sm-2 control-label">
+                <span class="form-required">*</span>课程名称（美）
+            </label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-title" name="titlem">
+            </div>
+        </div>
+            <else />
+        </if>
+        <div class="form-group">
+            <label for="input-sub_title" class="col-sm-2 control-label">关键词(中)</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-sub_title" name="subtitle">
+            </div>
+        </div>
+        <if condition="$db eq 1">
+        <div class="form-group">
+            <label for="input-sub_title" class="col-sm-2 control-label">关键词（美）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-sub_title" name="subtitlem">
+            </div>
+        </div>
+            <else />
+        </if>
+      <!--  <div class="form-group">
+            <label for="input-brand_id" class="col-sm-2 control-label">
+                <span class="form-required">*</span>课程品牌
+            </label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" id="input-brand_id" name="brand_id">
+                    <foreach name="brands" item="vo">
+                        <option value="{$vo.id}">{$vo.name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>-->
+        <div class="form-group">
+            <label for="js-thumbnail" class="col-sm-2 control-label">
+                <span class="form-required"></span>课程图片
+            </label>
+            <div class="col-md-6 col-sm-10">
+                <input type="hidden" name="thumbnail" id="js-thumbnail" value="">
+                <a href="javascript:uploadOneImage('图片上传','#js-thumbnail');">
+                    <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="js-thumbnail-preview"
+                         width="135" style="cursor: hand"/>
+                </a>
+            </div>
+        </div>
+      <!--  <div class="form-group">
+            <label for="js-thumbnail" class="col-sm-2 control-label">价格</label>
+            <div class="col-md-6 col-sm-10">
+                <table class="table table-bordered">
+                    <tr>
+                        <th><span class="form-required"></span>价格</th>
+
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="form-control input-no-border input-sm" name="price">
+                        </td>
+
+
+                    </tr>
+                </table>
+            </div>
+        </div>-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                <span class="form-required"></span>介绍(中)
+            </label>
+            <div class="col-md-6 col-sm-10">
+                <script type="text/plain" id="content3" name="contentr"></script>
+            </div>
+        </div>
+        <if condition="$db eq 1">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    <span class="form-required"></span>介绍（美）
+                </label>
+                <div class="col-md-6 col-sm-10">
+                    <script type="text/plain" id="content4" name="contenth"></script>
+                </div>
+            </div>
+            <else />
+        </if>
+        <!--   <div class="form-group">
+               <label class="col-sm-2 control-label">
+                   <span class="form-required"></span>简介(中)
+               </label>
+               <div class="col-md-6 col-sm-10">
+                   <script type="text/plain" id="content" name="subtitle"></script>
+               </div>
+           </div>
+           <if condition="$db eq 1">
+               <div class="form-group">
+                   <label class="col-sm-2 control-label">
+                       <span class="form-required"></span>简介（美）
+                   </label>
+                   <div class="col-md-6 col-sm-10">
+                       <script type="text/plain" id="content6" name="subtitlem"></script>
+                   </div>
+               </div>
+               <else />
+           </if>
+           <div class="form-group">
+               <label class="col-sm-2 control-label">
+                   <span class="form-required"></span>介绍(中)
+               </label>
+               <div class="col-md-6 col-sm-10">
+                   <script type="text/plain" id="content3" name="contentr"></script>
+               </div>
+           </div>
+           <if condition="$db eq 1">
+               <div class="form-group">
+                   <label class="col-sm-2 control-label">
+                       <span class="form-required"></span>介绍（美）
+                   </label>
+                   <div class="col-md-6 col-sm-10">
+                       <script type="text/plain" id="content4" name="contenth"></script>
+                   </div>
+               </div>
+               <else />
+           </if>-->
+
+       <div class="form-group">
+            <label class="col-sm-2 control-label">
+                <span class="form-required"></span>详情(中)
+            </label>
+            <div class="col-md-6 col-sm-10">
+                <script type="text/plain" id="content5" name="content"></script>
+            </div>
+           </div>
+        <if condition="$db eq 1">
+        <div class="form-group">
+              <label class="col-sm-2 control-label">
+                  <span class="form-required"></span>详情（美）
+              </label>
+              <div class="col-md-6 col-sm-10">
+                  <script type="text/plain" id="content2" name="contentm"></script>
+              </div>
+          </div>
+            <else />
+        </if>
+
+        <div class="form-group">
+
+            <label class="col-sm-2 control-label">
+                <span class="form-required"></span>相册
+            </label>
+            <div class="col-md-6 col-sm-10">
+                <ul id="photos" class="pic-list list-unstyled form-inline"></ul>
+                <a href="javascript:uploadMultiImage('图片上传','#photos','photos-item-tpl');"
+                   class="btn btn-default btn-sm">选择图片</a>
+            </div>
+
+        </div>
+
+        <div class="form-group1">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<style>
+    body{ padding-bottom:50px;}
+    .form-group1{
+        position:fixed; left:0px; bottom:0px; width:100%; height:50px; background-color:RGB(249,246,246); z-index:9999;
+    }
+    .form-group1 button{
+        margin-left: 68%;
+        width: 87px;
+        font-size: 18px;
+    }
+</style>
+<script src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        UE.getEditor("content");
+        UE.getEditor("content1");
+        UE.getEditor("content2");
+        UE.getEditor("content3");
+        UE.getEditor("content4");
+        UE.getEditor("content6");
+        UE.getEditor("content5");
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>压缩图片</title>
+</head>
+<body>
+<!-- <a class="btn btn-xs btn-success js-ajax-update" href="javascript:YzdlmComress()">开始压缩</a> -->
+<script>
+	// function appendHtml(){ 
+	// $(document).ready{
+	window.onload=function(){
+		// 插入数据
+		var obj = $('.margin-top-20 tbody tr');
+		$.each(obj,function(i){
+			var id = $(this).children('td').first('td').html();
+			// console.log(id);
+			$(this).children('td').last('td').append('<a class="js-ajax-dialog-btn" href="javascript:;" data-url={:cmf_plugin_url("YzdlmCompressImage://Index/index")} data-id='+id+' data-msg="确定开始压缩吗？">开始压缩</a>');
+			
+		});
+
+		$('.js-ajax-dialog-btn').click(function(){
+			var msg = $(this).attr('data-msg');
+			if(confirm(msg) == false) return false;
+			
+			var id = $(this).attr('data-id');
+			var url = $(this).attr('data-url');
+		    $.post(url,{id:id},function(res){
+				
+		        alert(res.msg);
+		        //console.log(res);
+		    })
+			
+		});
+	};
+
+
+	function YzdlmComress() {
+		
+		//获取当前页面的id
+		var ids = '';
+		var obj = $('.margin-top-20 tbody tr');
+		var len = obj.length;
+		$.each(obj,function(i){
+			var id = $(this).children('td').first('td').html();
+			if(len-1 == i){
+				ids += id;
+			}else{
+				ids += id+',';
+			}
+		});
+
+		//请求接口进行压缩
+		$.post("{:cmf_plugin_url('YzdlmCompressImage://AdminIndex/index')}",{id:ids},function(res){
+			// if(res.success) {
+			//     toastr.success('推送成功！剩余推送次数 ' + res.remain)
+			//     setTimeout(function(){
+			//         location.reload()
+			//     },1000)
+			// }
+			console.log(res);
+		})
+
+	}
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<include file="public@head">
+	<div class="gkcover"></div>
+	<div class="page-banner">
+		<div class="picbox"><img class="anim_emt zoom_in" src="{:cmf_get_image_preview_url($hdp.image)}" alt="策略研究"></div>
+		<div class="infobox">
+			<div class="infobox-wrap anim_emt fadein">
+				<h3 class="title">{$fenlei1.name}</h3>
+				<h4 class="des">{$fenlei1.description|html_entity_decode}</h4>
+			</div>
+		</div>
+		<div class="insbottom">
+			<ul class="instool-list">
+				<li class="item">
+					<span class="i i1"></span>
+					<div class="info">
+						<img src="__TMPL__/public/assets/images/bphone.jpg">
+					</div>
+				</li>
+				<li class="item">
+					<span class="i i2"></span>
+					<div class="info">
+						<img src="__TMPL__/public/assets/images/wx1.jpg">
+					</div>
+				</li>
+				<li class="item">
+					<span class="i i3"></span>
+					<div class="info">
+						<img src="__TMPL__/public/assets/images/bqq.jpg">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="insresult">
+		<ul class="insresult-list clearfix">
+			<volist name="gsxw" id="vo">
+			<li class="item anim_emt to_scale">
+				<a href="{$vo.url}">
+					<div class="picbox">
+						<img src="{:cmf_get_image_preview_url($vo.thumbnails)}">
+					</div>
+					<div class="infobox">
+						<div class="inner">
+							<h3 class="title-cn">{$vo.post_title}</h3>
+							<h4 class="title-en">MINISO SOUNDBAR</h4>
+						</div>
+					</div>
+				</a>
+			</li>
+			</volist>
+		</ul>
+	</div>
+	<include file="public@foot">

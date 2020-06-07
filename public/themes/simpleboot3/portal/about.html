@@ -1,0 +1,87 @@
+<include file="public@head">
+	<div class="gkcover"></div>
+	<div class="page-banner">
+		<div class="picbox"><img class=" anim_emt zoom_in" src="{:cmf_get_image_preview_url($hdp.image)}" alt="关于我们"></div>
+		<div class="infobox">
+			<div class="infobox-wrap">
+				<h3 class="title">关于我们</h3>
+				<h4 class="des">一群年轻又老练的设计狮</h4>
+			</div>
+		</div>
+		<div class="insbottom">
+			<ul class="instool-list">
+				<li class="item">
+					<span class="i i1"></span>
+					<div class="info">
+						<img src="images/bphone.jpg">
+					</div>
+				</li>
+				<li class="item">
+					<span class="i i2"></span>
+					<div class="info">
+						<img src="images/wx1.jpg">
+					</div>
+				</li>
+				<li class="item">
+					<span class="i i3"></span>
+					<div class="info">
+						<img src="images/bqq.jpg">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="coprofile">
+		<volist name="fenlei" id="vo" length="1">
+		<div id="aboutAim1" class="gkmethod anim_emt fadein">
+			<div class="fixratio-wrap">
+				<div class="picbox"><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="{$vo.name}"></div>
+				<div class="infobox">
+					<h3 class="title">{$vo.name}</h3>
+					<div class="just">{$vo.namem|html_entity_decode}</div>
+					<div class="line"></div>
+					<div class="text">
+					{$vo.description|html_entity_decode}
+					</div>
+				</div>
+			</div>
+		</div>
+		</volist>
+		<volist name="fenlei" id="vo" offset="1" length="1">
+		<div id="aboutAim2" class="copanel back3f0 cointro anim_emt fadein">
+			<div class="picbox"><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="果壳方法论" style="opacity: 0;"></div>
+			<div class="infobox">
+				<div class="copanel-head">
+					<h3 class="title-en">{$vo.namem|html_entity_decode}</h3>
+					<h4 class="title-cn">{$vo.name}</h4>
+				</div>
+				<div class="copanel-body">
+					<div class="inner">	{$vo.description|html_entity_decode}</div>
+				</div>
+			</div>
+		</div>
+		</volist>
+		<volist name="fenlei" id="vo" offset="2" length="1">
+		<div id="aboutAim3" class="copanel coteam anim_emt fadein">
+			<div class="picbox"><img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="{$vo.name}"></div>
+			<div class="infobox">
+				<div class="copanel-head">
+					<h3 class="title-en">{$vo.namem|html_entity_decode}</h3>
+					<h4 class="title-cn">{$vo.name}</h4>
+				</div>
+				<div class="copanel-body">
+					<div class="inner">	{$vo.description|html_entity_decode} </div>
+				</div>
+			</div>
+		</div>
+		</volist>
+		<volist name="fenlei" id="vo" offset="4" length="1">
+		<div id="aboutAim4" class="joinus anim_emt fadein">
+			<img src="{:cmf_get_image_preview_url($vo.thumbnail)}" alt="{$vo.name}">
+			<div class="info">
+				<div class="text">{$vo.namem|html_entity_decode}</div>
+			</div>
+		</div>
+		</volist>
+	</div>
+	<include file="public@foot">

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>查看中心</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<table class="table">
+    <div align="center"><h3>投诉信息查看</h3></div>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>E-mail</th>
+        <th>标题</th>
+        <th>时间</th>
+        <th>留言内容</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="db" id="vo" key="k">
+        <tr class="active">
+            <td>{$k}</td>
+            <td>{$vo.username}</td>
+            <td>{$vo.mobile}</td>
+            <td>{$vo.email}</td>
+            <td>{$vo.companyname}</td>
+            <td>{$vo.data}</td>
+            <td>{$vo.mess}</td>
+        </tr>
+    </volist>
+    </tbody>
+</table>
+
+</body>
+</html>

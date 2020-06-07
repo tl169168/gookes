@@ -1,0 +1,161 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+</style>
+<body>
+<script type="text/javascript">
+    function onc(){
+        var files = document.getElementById("input").files;
+        for(var i=0; i< files.length; i++){
+            // alert(input.files[i].name);
+        }
+    }
+</script>
+<form action="{:url('AdminArticle/uploadMultiImages')}" enctype="multipart/form-data" method="post">
+    <table class="table table-bordered">
+        <tr>
+            <td>
+    选择图片：<input type="file" id="input" name="image[]" onchange="onc()" multiple="multiple" />
+                <input type="hidden" value="{$id}" name="id">
+            </td>
+            <td>
+                <input type="submit"  value="提交"></td>
+        </tr>
+    <tr>
+        <th>标题<span class="form-required">*</span></th>
+        <td>
+            <input class="form-control" type="text" name="title"
+                   id="title" required value="" placeholder="请输入标题"/>
+            <input class="form-control" type="hidden" value="{$id}" name="categories"
+                   id="js-categories-id-input"/>
+
+        </td>
+    </tr>
+    <tr>
+        <th>标题(EN)<span class="form-required">*</span></th>
+        <td>
+            <input class="form-control" type="text" name="post_titleen"
+                   id="title" required value="" placeholder="请输入标题"/>
+            <input  type="hidden" style="float:left;" name="en" id="keyword" value="１"
+                    placeholder="请输入关键字">
+        </td>
+    </tr>
+    <tr>
+        <th>关键词</th>
+        <td>
+            <input class="form-control" type="text" name="post_keywords" id="keywords" value=""
+                   placeholder="请输入关键字">
+            <p class="help-block">多关键词之间用英文逗号隔开</p>
+        </td>
+    </tr>
+    <tr>
+        <th>关键词(EN)</th>
+        <td>
+            <input class="form-control" type="text" name="post_keywordsen" id="keywords" value=""
+                   placeholder="请输入关键字">
+            <p class="help-block">Multiple keywords are separated by English commas</p>
+        </td>
+    </tr>
+    <tr>
+        <th>内容</th>
+        <td>
+            <input class="form-control" type="text" name="post_description" id="keywords" value=""
+                   placeholder="请输入关键字">
+            <p class="help-block">多内容之间用英文逗号隔开</p>
+        </td>
+    </tr>
+    <tr>
+        <th>内容(EN)</th>
+        <td>
+            <input class="form-control" type="text" name="post_descriptionen" id="keywords" value=""
+                   placeholder="请输入关键字">
+            <p class="help-block">Multiple keywords are separated by English commas</p>
+        </td>
+    </tr>
+    <tr>
+        <th>文章来源</th>
+        <td><input class="form-control" type="text" name="post_source" id="source" value=""
+                   placeholder="请输入文章来源"></td>
+    </tr>
+    <tr>
+        <th>文章来源(EN)</th>
+        <td><input class="form-control" type="text" name="post_sourceen" id="source" value=""
+                   placeholder="请输入文章来源"></td>
+    </tr>
+    <tr>
+        <th>摘要</th>
+        <td>
+                            <textarea class="form-control" name="post_excerpt" style="height: 50px;"
+                                      placeholder="请填写摘要"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <th>摘要(EN)</th>
+        <td>
+                            <textarea class="form-control" name="post_excerpten" style="height: 50px;"
+                                      placeholder="请填写摘要" id=""></textarea>
+        </td>
+    </tr>
+    <tr>
+        <th>内容</th>
+        <td>
+            <script type="text/plain" id="content" name="post_content"></script>
+        </td>
+    </tr>
+    <tr>
+        <th>内容(EN)</th>
+        <td>
+            <script type="text/plain" id="content1" name="post_contenten"></script>
+        </td>
+    </tr>
+    </table>
+    <input type="submit"  value="提交" align="center" style="background:red; width: 60%;height: 20px; text-align: center; margin-left: 20%; padding: 20px;"/>
+</form>
+<!--<p>请尝试在浏览文件时选取一个以上的文件。</p>-->
+
+</body>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        UE.getEditor("content");
+        UE.getEditor("content1");
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+
+    function doSelectCategory() {
+        var selectedCategoriesId = $('#js-categories-id-input').val();
+        openIframeLayer("{:url('AdminCategory/select')}?ids=" + selectedCategoriesId, '请选择分类', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedCategories = iframeWin.confirm();
+                if (selectedCategories.selectedCategoriesId.length == 0) {
+                    layer.msg('请选择分类');
+                    return;
+                }
+                $('#js-categories-id-input').val(selectedCategories.selectedCategoriesId.join(','));
+                $('#js-categories-name-input').val(selectedCategories.selectedCategoriesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+</script>
+    </html>

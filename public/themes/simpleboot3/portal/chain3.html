@@ -1,0 +1,27 @@
+<include file="public@head">
+	<div class="gkcover"></div>
+	<div class="page-banner">
+		<notempty name="$gsxw.thumbnail">
+		 <div class="picbox"><img class="anim_emt fadein" src="{:cmf_get_image_preview_url($gsxw.thumbnail)}" alt="{$gsxw.name}}"></div>
+		</notempty>
+		<div class="insbottom">
+			<ul class="instool-list">
+				<li class="item">
+					<span class="i i1"></span>
+				</li>
+				<li class="item">
+					<span class="i i2"></span>
+					<div class="info">
+						<img src="images/wx1.jpg">
+					</div>
+				</li>
+				<li class="item">
+					<span class="i i3"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="chain-article">
+		{$gsxw.post_content|html_entity_decode}
+	</div>
+	<include file="public@foot">
